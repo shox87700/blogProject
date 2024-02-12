@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MrJakhonov's Blog</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">MrJakhonov's Blog</a></h1>
+    </header>
+    <hr>
+    {% if user.is_authenticated %}
+        <p>Xush kelibsiz {{ user.username }}!</p>
+        <p><a href="{% url 'logout' %}">Saytdan chiqish</a></p>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}">Saytga Kirish</a>
+            <a href="{% url 'signup' %}">Ro'yxatdan o'tish</a>
+        </p>
+    {% endif %}
+    <div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <footer>
+        <h2><a href="{% url 'post_new' %}">Yangi post yozish</a></h2>
+    </footer>
+</body>
+</html>
